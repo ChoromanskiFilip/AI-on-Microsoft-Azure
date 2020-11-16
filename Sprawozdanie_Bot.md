@@ -36,8 +36,8 @@ Bot został stworzony za pomocą aplikacji Bot Composer. Za pomocą tej aplikacj
 
 1. Wdrożenie szablonów ARM dwóch resource grup z folderu [ARM_templates](/ARM_templates/)
 1. Ustawienie wszystkich zmiennych konfiguracyjnych dla API w pliku [__init__.py](/Store-Bot/GetProducts/__init__.py)
-- konfiguracja połączenia z Firebase
-- konfiguracja połączenia z Text Analytics API
+	- konfiguracja połączenia z Firebase
+	- konfiguracja połączenia z Text Analytics API
 1. Deploy API do Azure Functions - najlepiej za pomocą VS Code oraz rozszerzenia *ms-azuretools.vscode-azurefunctions*
 1. Odtworzenie projektu bota przy pomocy aplikacji Bot Framework Composer
 1. Ustawienie odpowiedniego linku oraz klucza do API w Azure Function we wszystkich aktywnościach w bocie.
