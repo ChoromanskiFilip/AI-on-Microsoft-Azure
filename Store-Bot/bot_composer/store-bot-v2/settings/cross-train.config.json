@@ -1,0 +1,14 @@
+{
+  "store-bot-v2.en-us": {
+    "rootDialog": true,
+    "triggers": {
+      "MakeOrder": [
+        "RateBot.en-us"
+      ],
+      "SearchOrder": [
+        "RateBot.en-us"
+      ],
+      "Hello": []
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "$kind": "Microsoft.MultiLanguageRecognizer",
+  "id": "LUIS_RateBot",
+  "recognizers": {
+    "en-us": "RateBot.en-us.lu",
+    "": "RateBot.en-us.lu"
+  }
+}

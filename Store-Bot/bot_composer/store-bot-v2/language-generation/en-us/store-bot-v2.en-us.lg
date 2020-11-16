@@ -1,0 +1,79 @@
+[import](common.lg)
+
+# SendActivity_Welcome()
+- ```Hello, 
+How can I help you?
+```
+
+
+
+
+
+# SendActivity_wvBEbj()
+- Sure, I am happy to help you make an order :)
+# SendActivity_zzkqst()
+- I can't help you with this :(
+
+
+# ChoiceInput_Prompt_F6JrSr()
+- What type of item do you want to order? Choose from below options.
+# ChoiceInput_UnrecognizedPrompt_F6JrSr()
+- Specified category does not exist
+
+
+# SendActivity_PRGXOK()
+- You chose ${dialog.chosen_category}. 
+# ChoiceInput_Prompt_JR4Jcv()
+- Which model do you want to order? Choose from below options.
+# ChoiceInput_UnrecognizedPrompt_JR4Jcv()
+- We don't have this ${dialog.chosen_category} model. Chose somethimg from the list:
+# ChoiceInput_Prompt_8ElQDF()
+- What ${dialog.choosable_label} for your ${dialog.chosen_category} do you want?
+# ChoiceInput_UnrecognizedPrompt_8ElQDF()
+- We don't have ${dialog.chosen_product} with given size.
+# SendActivity_3Py61X()
+- You chose: ${dialog.chosen_product} in variant ${dialog.chosen_variant}
+# TextInput_Prompt_mU5DUx()
+- Now, I need your address where we will send your order. Please provide all the required information: City, Postal code, Street
+# TextInput_Prompt_M3Bt9N()
+- Please give me also your email address where you will receive confirmation of order.
+# SendActivity_3DKoRW()
+- ```
+        Thank you, for patience. Your order was send. Here you can find short summary: 
+        - Order ID: ${dialog.neworder_response.content.order_id}
+        - Product: ${dialog.chosen_product} in variant ${dialog.chosen_variant}
+        - Price: ${dialog.neworder_response.content.product.price}
+        - Address: ${dialog.delivery_address}
+        - Email: ${dialog.email}
+    ```
+
+# SendActivity_gTw1R9()
+- "${dialog.order_number}"
+# SendActivity_Z828C3()
+- Do you know that ${dialog.actual_sentiment.content.answer} % people was happy with my service.
+# SendActivity_joqiAT()
+- ```
+        Here is your order summary:
+        - State:  ${dialog.order_search.content.state}
+        - Order ID: ${dialog.order_search.content.order_id}
+        - Product: ${dialog.order_search.content.product.name} in variant ${dialog.order_search.content.product.variant}
+        - Price: ${dialog.order_search.content.product.price}
+        - Address: ${dialog.order_search.content.address}
+        - Email: ${dialog.order_search.content.email}
+    ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# SendActivity_rJUwea()
+- Hello :) How can I help you?

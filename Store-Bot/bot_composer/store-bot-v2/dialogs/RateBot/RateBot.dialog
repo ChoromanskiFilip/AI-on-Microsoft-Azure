@@ -1,0 +1,87 @@
+{
+  "$kind": "Microsoft.AdaptiveDialog",
+  "$designer": {
+    "id": "aPwoUc",
+    "name": "RateBot",
+    "description": ""
+  },
+  "autoEndDialog": true,
+  "defaultResultProperty": "dialog.result",
+  "triggers": [
+    {
+      "$kind": "Microsoft.OnBeginDialog",
+      "$designer": {
+        "name": "RateBot",
+        "description": "",
+        "id": "8PMCOM"
+      },
+      "actions": [
+        {
+          "$kind": "Microsoft.TextInput",
+          "$designer": {
+            "id": "4V2k8K"
+          },
+          "disabled": false,
+          "maxTurnCount": 3,
+          "alwaysPrompt": false,
+          "allowInterruptions": false,
+          "prompt": "${TextInput_Prompt_4V2k8K()}",
+          "unrecognizedPrompt": "",
+          "invalidPrompt": "",
+          "defaultValueResponse": "",
+          "property": "dialog.user_opinion"
+        },
+        {
+          "$kind": "Microsoft.HttpRequest",
+          "$designer": {
+            "id": "82yuR2"
+          },
+          "url": "https://azure-ai-bot-backend.azurewebsites.net/api/GetProducts?action=NewBotRating",
+          "headers": {
+            "x-functions-key": "F9OPeF38Gn5mVJmYhKDjb0q6NspFI0pioO8g1FwZ8LzE4kKHWm7TNQ=="
+          },
+          "resultProperty": "dialog.opinion_response",
+          "responseType": "json",
+          "method": "POST",
+          "body": {
+            "answer": "${dialog.user_opinion}"
+          }
+        },
+        {
+          "$kind": "Microsoft.IfCondition",
+          "$designer": {
+            "id": "6XFyTh"
+          },
+          "condition": "=dialog.opinion_response.content == \"positive\"",
+          "actions": [
+            {
+              "$kind": "Microsoft.SendActivity",
+              "$designer": {
+                "id": "QuN2rx"
+              },
+              "activity": "${SendActivity_QuN2rx()}"
+            }
+          ],
+          "elseActions": [
+            {
+              "$kind": "Microsoft.SendActivity",
+              "$designer": {
+                "id": "XSBOxx"
+              },
+              "activity": "${SendActivity_XSBOxx()}"
+            }
+          ]
+        },
+        {
+          "$kind": "Microsoft.EndDialog",
+          "$designer": {
+            "id": "An6B8Y"
+          }
+        }
+      ]
+    }
+  ],
+  "generator": "RateBot.lg",
+  "recognizer": "RateBot.lu.qna",
+  "id": "RateBot"
+}

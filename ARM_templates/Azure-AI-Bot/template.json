@@ -1,0 +1,66 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "accounts_store_bot_ta_name": {
+            "defaultValue": "store-bot-ta",
+            "type": "String"
+        },
+        "accounts_fc_store_bot_luis_name": {
+            "defaultValue": "fc-store-bot-luis",
+            "type": "String"
+        },
+        "accounts_fc_store_bot_luis_Authoring_name": {
+            "defaultValue": "fc-store-bot-luis-Authoring",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.CognitiveServices/accounts",
+            "apiVersion": "2017-04-18",
+            "name": "[parameters('accounts_fc_store_bot_luis_name')]",
+            "location": "centralus",
+            "sku": {
+                "name": "F0"
+            },
+            "kind": "LUIS",
+            "properties": {
+                "customSubDomainName": "[parameters('accounts_fc_store_bot_luis_name')]",
+                "privateEndpointConnections": [],
+                "publicNetworkAccess": "Enabled"
+            }
+        },
+        {
+            "type": "Microsoft.CognitiveServices/accounts",
+            "apiVersion": "2017-04-18",
+            "name": "[parameters('accounts_fc_store_bot_luis_Authoring_name')]",
+            "location": "westus",
+            "sku": {
+                "name": "F0"
+            },
+            "kind": "LUIS.Authoring",
+            "properties": {
+                "customSubDomainName": "fc-store-bot-luis-authoring",
+                "privateEndpointConnections": [],
+                "publicNetworkAccess": "Enabled"
+            }
+        },
+        {
+            "type": "Microsoft.CognitiveServices/accounts",
+            "apiVersion": "2017-04-18",
+            "name": "[parameters('accounts_store_bot_ta_name')]",
+            "location": "centralus",
+            "sku": {
+                "name": "F0"
+            },
+            "kind": "TextAnalytics",
+            "properties": {
+                "customSubDomainName": "[parameters('accounts_store_bot_ta_name')]",
+                "privateEndpointConnections": [],
+                "publicNetworkAccess": "Enabled"
+            }
+        }
+    ]
+}

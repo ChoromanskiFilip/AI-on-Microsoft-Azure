@@ -1,0 +1,426 @@
+{
+  "$kind": "Microsoft.AdaptiveDialog",
+  "$designer": {
+    "$designer": {
+      "name": "store-bot-v2",
+      "description": "",
+      "id": "sLdSP0"
+    }
+  },
+  "autoEndDialog": true,
+  "defaultResultProperty": "dialog.result",
+  "triggers": [
+    {
+      "$kind": "Microsoft.OnConversationUpdateActivity",
+      "$designer": {
+        "id": "376720"
+      },
+      "actions": [
+        {
+          "$kind": "Microsoft.Foreach",
+          "$designer": {
+            "id": "518944",
+            "name": "Loop: for each item"
+          },
+          "itemsProperty": "turn.Activity.membersAdded",
+          "actions": [
+            {
+              "$kind": "Microsoft.IfCondition",
+              "$designer": {
+                "id": "641773",
+                "name": "Branch: if/else"
+              },
+              "condition": "string(dialog.foreach.value.id) != string(turn.Activity.Recipient.id)",
+              "actions": [
+                {
+                  "$kind": "Microsoft.SendActivity",
+                  "$designer": {
+                    "id": "859266",
+                    "name": "Send a response"
+                  },
+                  "activity": "${SendActivity_Welcome()}"
+                },
+                {
+                  "$kind": "Microsoft.HttpRequest",
+                  "$designer": {
+                    "id": "dGsSlD"
+                  },
+                  "url": "https://azure-ai-bot-backend.azurewebsites.net/api/GetProducts?action=GetBotRating",
+                  "method": "GET",
+                  "headers": {
+                    "x-functions-key": "F9OPeF38Gn5mVJmYhKDjb0q6NspFI0pioO8g1FwZ8LzE4kKHWm7TNQ=="
+                  },
+                  "responseType": "json",
+                  "resultProperty": "dialog.actual_sentiment"
+                },
+                {
+                  "$kind": "Microsoft.SendActivity",
+                  "$designer": {
+                    "id": "Z828C3"
+                  },
+                  "activity": "${SendActivity_Z828C3()}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "$kind": "Microsoft.OnIntent",
+      "$designer": {
+        "id": "GZZw3p",
+        "name": "MakeOrder"
+      },
+      "intent": "MakeOrder",
+      "actions": [
+        {
+          "$kind": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "wvBEbj"
+          },
+          "activity": "${SendActivity_wvBEbj()}"
+        },
+        {
+          "$kind": "Microsoft.HttpRequest",
+          "$designer": {
+            "id": "11bqiO"
+          },
+          "url": "https://azure-ai-bot-backend.azurewebsites.net/api/GetProducts?action=GetCategories",
+          "method": "GET",
+          "headers": {
+            "x-functions-key": "F9OPeF38Gn5mVJmYhKDjb0q6NspFI0pioO8g1FwZ8LzE4kKHWm7TNQ=="
+          },
+          "responseType": "json",
+          "resultProperty": "dialog.categories"
+        },
+        {
+          "$kind": "Microsoft.ChoiceInput",
+          "$designer": {
+            "id": "F6JrSr",
+            "name": "Choose category"
+          },
+          "defaultLocale": "en-us",
+          "disabled": false,
+          "maxTurnCount": 3,
+          "alwaysPrompt": false,
+          "allowInterruptions": false,
+          "prompt": "${ChoiceInput_Prompt_F6JrSr()}",
+          "unrecognizedPrompt": "${ChoiceInput_UnrecognizedPrompt_F6JrSr()}",
+          "invalidPrompt": "",
+          "defaultValueResponse": "",
+          "property": "dialog.chosen_category",
+          "choices": "dialog.categories.content",
+          "recognizerOptions": {
+            "recognizeOrdinals": true,
+            "recognizeNumbers": true
+          },
+          "choiceOptions": {
+            "includeNumbers": true,
+            "inlineOrMore": ", or ",
+            "inlineOr": " or ",
+            "inlineSeparator": ", "
+          },
+          "style": "suggestedAction"
+        },
+        {
+          "$kind": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "PRGXOK"
+          },
+          "activity": "${SendActivity_PRGXOK()}"
+        },
+        {
+          "$kind": "Microsoft.HttpRequest",
+          "$designer": {
+            "id": "vWZ3jD"
+          },
+          "url": "https://azure-ai-bot-backend.azurewebsites.net/api/GetProducts?action=GetProducts&category=${dialog.chosen_category}",
+          "method": "GET",
+          "headers": {
+            "x-functions-key": "F9OPeF38Gn5mVJmYhKDjb0q6NspFI0pioO8g1FwZ8LzE4kKHWm7TNQ=="
+          },
+          "resultProperty": "dialog.products",
+          "responseType": "json"
+        },
+        {
+          "$kind": "Microsoft.ChoiceInput",
+          "$designer": {
+            "id": "JR4Jcv"
+          },
+          "defaultLocale": "en-us",
+          "disabled": false,
+          "maxTurnCount": 3,
+          "alwaysPrompt": false,
+          "allowInterruptions": false,
+          "prompt": "${ChoiceInput_Prompt_JR4Jcv()}",
+          "unrecognizedPrompt": "${ChoiceInput_UnrecognizedPrompt_JR4Jcv()}",
+          "invalidPrompt": "",
+          "defaultValueResponse": "",
+          "choiceOptions": {
+            "includeNumbers": true,
+            "inlineOrMore": ", or ",
+            "inlineOr": " or ",
+            "inlineSeparator": ", "
+          },
+          "property": "dialog.chosen_product",
+          "style": "suggestedAction",
+          "choices": "dialog.products.content",
+          "recognizerOptions": {
+            "recognizeOrdinals": true,
+            "recognizeNumbers": true
+          }
+        },
+        {
+          "$kind": "Microsoft.IfCondition",
+          "$designer": {
+            "id": "XHkWq7"
+          },
+          "condition": "=dialog.chosen_category == \"Laptop\"",
+          "actions": [
+            {
+              "$kind": "Microsoft.SetProperties",
+              "$designer": {
+                "id": "7MpAII"
+              },
+              "assignments": [
+                {
+                  "property": "dialog.choosable",
+                  "value": "disk"
+                },
+                {
+                  "property": "dialog.choosable_label",
+                  "value": "disk size"
+                }
+              ]
+            }
+          ],
+          "elseActions": [
+            {
+              "$kind": "Microsoft.SetProperties",
+              "$designer": {
+                "id": "GXWLPA"
+              },
+              "assignments": [
+                {
+                  "property": "dialog.choosable",
+                  "value": "colors"
+                },
+                {
+                  "property": "dialog.choosable_label",
+                  "value": "color"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "$kind": "Microsoft.HttpRequest",
+          "$designer": {
+            "id": "HENR1i"
+          },
+          "url": "https://azure-ai-bot-backend.azurewebsites.net/api/GetProducts?action=GetVariants&category=${dialog.chosen_category}&variant=${dialog.choosable}&model=${dialog.chosen_product}",
+          "headers": {
+            "x-functions-key": "F9OPeF38Gn5mVJmYhKDjb0q6NspFI0pioO8g1FwZ8LzE4kKHWm7TNQ=="
+          },
+          "resultProperty": "dialog.variant",
+          "responseType": "json",
+          "method": "GET"
+        },
+        {
+          "$kind": "Microsoft.ChoiceInput",
+          "$designer": {
+            "id": "8ElQDF"
+          },
+          "defaultLocale": "en-us",
+          "disabled": false,
+          "maxTurnCount": 3,
+          "alwaysPrompt": false,
+          "allowInterruptions": false,
+          "prompt": "${ChoiceInput_Prompt_8ElQDF()}",
+          "unrecognizedPrompt": "${ChoiceInput_UnrecognizedPrompt_8ElQDF()}",
+          "invalidPrompt": "",
+          "defaultValueResponse": "",
+          "choiceOptions": {
+            "includeNumbers": true,
+            "inlineOrMore": ", or ",
+            "inlineOr": " or ",
+            "inlineSeparator": ", "
+          },
+          "style": "suggestedAction",
+          "choices": "dialog.variant.content",
+          "recognizerOptions": {
+            "recognizeOrdinals": true
+          },
+          "property": "dialog.chosen_variant"
+        },
+        {
+          "$kind": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "3Py61X"
+          },
+          "activity": "${SendActivity_3Py61X()}"
+        },
+        {
+          "$kind": "Microsoft.TextInput",
+          "$designer": {
+            "id": "mU5DUx"
+          },
+          "disabled": false,
+          "maxTurnCount": 3,
+          "alwaysPrompt": false,
+          "allowInterruptions": false,
+          "prompt": "${TextInput_Prompt_mU5DUx()}",
+          "unrecognizedPrompt": "",
+          "invalidPrompt": "",
+          "defaultValueResponse": "",
+          "property": "dialog.delivery_address"
+        },
+        {
+          "$kind": "Microsoft.TextInput",
+          "$designer": {
+            "id": "M3Bt9N"
+          },
+          "disabled": false,
+          "maxTurnCount": 3,
+          "alwaysPrompt": false,
+          "allowInterruptions": false,
+          "prompt": "${TextInput_Prompt_M3Bt9N()}",
+          "unrecognizedPrompt": "",
+          "invalidPrompt": "",
+          "defaultValueResponse": "",
+          "property": "dialog.email"
+        },
+        {
+          "$kind": "Microsoft.HttpRequest",
+          "$designer": {
+            "id": "uVSp20"
+          },
+          "url": "https://azure-ai-bot-backend.azurewebsites.net/api/GetProducts?action=NewOrder",
+          "headers": {
+            "x-functions-key": "F9OPeF38Gn5mVJmYhKDjb0q6NspFI0pioO8g1FwZ8LzE4kKHWm7TNQ=="
+          },
+          "resultProperty": "dialog.neworder_response",
+          "responseType": "json",
+          "method": "POST",
+          "body": {
+            "email": "${dialog.email}",
+            "product": {
+              "category": "${dialog.chosen_category}",
+              "name": "${dialog.chosen_product}",
+              "variant": "${dialog.chosen_variant}"
+            },
+            "address": "${dialog.delivery_address}"
+          }
+        },
+        {
+          "$kind": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "3DKoRW"
+          },
+          "activity": "${SendActivity_3DKoRW()}"
+        },
+        {
+          "$kind": "Microsoft.BeginDialog",
+          "$designer": {
+            "id": "PN9AZn"
+          },
+          "activityProcessed": true,
+          "dialog": "RateBot"
+        }
+      ],
+      "condition": "#MakeOrder.Score >= 0.8"
+    },
+    {
+      "$kind": "Microsoft.OnUnknownIntent",
+      "$designer": {
+        "id": "oWttdS"
+      },
+      "actions": [
+        {
+          "$kind": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "zzkqst"
+          },
+          "activity": "${SendActivity_zzkqst()}"
+        }
+      ]
+    },
+    {
+      "$kind": "Microsoft.OnIntent",
+      "$designer": {
+        "id": "dUzZfH",
+        "name": "SearchOrder"
+      },
+      "intent": "SearchOrder",
+      "condition": "=#SearchOrder.Score >= 0.9",
+      "actions": [
+        {
+          "$kind": "Microsoft.TextInput",
+          "$designer": {
+            "id": "zIRRGZ"
+          },
+          "disabled": false,
+          "maxTurnCount": 3,
+          "alwaysPrompt": false,
+          "allowInterruptions": false,
+          "prompt": "${TextInput_Prompt_zIRRGZ()}",
+          "unrecognizedPrompt": "",
+          "invalidPrompt": "",
+          "defaultValueResponse": "",
+          "property": "dialog.order_number"
+        },
+        {
+          "$kind": "Microsoft.HttpRequest",
+          "$designer": {
+            "id": "RaoRV4"
+          },
+          "url": "https://azure-ai-bot-backend.azurewebsites.net/api/GetProducts?action=FindOrder&order_id=${dialog.order_number}",
+          "method": "GET",
+          "headers": {
+            "x-functions-key": "F9OPeF38Gn5mVJmYhKDjb0q6NspFI0pioO8g1FwZ8LzE4kKHWm7TNQ=="
+          },
+          "responseType": "json",
+          "resultProperty": "dialog.order_search"
+        },
+        {
+          "$kind": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "joqiAT"
+          },
+          "activity": "${SendActivity_joqiAT()}"
+        },
+        {
+          "$kind": "Microsoft.BeginDialog",
+          "$designer": {
+            "id": "xetxHK"
+          },
+          "activityProcessed": true,
+          "dialog": "RateBot"
+        }
+      ]
+    },
+    {
+      "$kind": "Microsoft.OnIntent",
+      "$designer": {
+        "id": "o0UuSb",
+        "name": "Hello"
+      },
+      "intent": "Hello",
+      "actions": [
+        {
+          "$kind": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "rJUwea"
+          },
+          "activity": "${SendActivity_rJUwea()}"
+        }
+      ],
+      "condition": "=#Hello.Score >= 0.9"
+    }
+  ],
+  "$schema": "https://raw.githubusercontent.com/microsoft/BotFramework-Composer/stable/Composer/packages/server/schemas/sdk.schema",
+  "generator": "store-bot-v2.lg",
+  "id": "store-bot-v2",
+  "recognizer": "store-bot-v2.lu.qna"
+}

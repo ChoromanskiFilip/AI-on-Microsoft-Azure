@@ -1,0 +1,12 @@
+{
+    "luis": {
+        "RateBot_en_us_lu": {
+            "appId": "f84387cc-d6d6-48bc-a137-2f34e61e4c0b",
+            "version": "0.1"
+        },
+        "store_bot_v2_en_us_lu": {
+            "appId": "3422c09b-91e6-4601-a14a-7bd38db277d5",
+            "version": "0.6"
+        }
+    }
+}

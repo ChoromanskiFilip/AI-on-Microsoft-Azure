@@ -1,0 +1,52 @@
+> To learn more about the LU file format, read the documentation at
+> https://aka.ms/lu-file-format
+
+# MakeOrder
+- How can I buy {OrderItem=something}?
+- How can I order {OrderItem=something}?
+- I want to buy {OrderItem=something}
+- I want to make an order
+
+# ChoiceInput_Response_F6JrSr
+- I want to buy {OrderItem}
+- I want to order {OrderItem}
+- I want {OrderItem}
+- {OrderItem}
+
+# ChoiceInput_Response_JR4Jcv
+- I want to buy {OrderItem}
+- I want to order {OrderItem}
+- I want {OrderItem}
+- {OrderItem}
+
+# ChoiceInput_Response_8ElQDF
+- I choose {Variant}
+- I want {Variant}
+- {Variant}
+
+
+# TextInput_Response_mU5DUx
+- {Address}
+
+
+# TextInput_Response_M3Bt9N
+- {Email}
+
+# SearchOrder
+- I want to find my order.
+- What is state of my order?
+- Where is my order?
+- How to fin order?
+
+# TextInput_Response_zIRRGZ
+- {OrderNum}
+- This is my: {OrderNum}
+- This is my {OrderNum}
+- Here it is {OrderNum}
+
+# Hello
+- Hello
+- Hi
+- Good morning
+- Good evening
+- Good afternoon

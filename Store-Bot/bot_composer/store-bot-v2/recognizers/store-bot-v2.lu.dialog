@@ -1,0 +1,8 @@
+{
+  "$kind": "Microsoft.MultiLanguageRecognizer",
+  "id": "LUIS_store-bot-v2",
+  "recognizers": {
+    "en-us": "store-bot-v2.en-us.lu",
+    "": "store-bot-v2.en-us.lu"
+  }
+}

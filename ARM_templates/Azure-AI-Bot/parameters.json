@@ -1,0 +1,15 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "accounts_store_bot_ta_name": {
+            "value": null
+        },
+        "accounts_fc_store_bot_luis_name": {
+            "value": null
+        },
+        "accounts_fc_store_bot_luis_Authoring_name": {
+            "value": null
+        }
+    }
+}
