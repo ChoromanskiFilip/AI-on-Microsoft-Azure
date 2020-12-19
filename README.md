@@ -10,4 +10,4 @@
 
 ## Sprawozdania:
 
-- [Bot dla sklepu internetowego](Sprawozdanie_Bot.md)
+- [Bot dla sklepu internetowego](Store-Bot\Sprawozdanie_Bot.md)
