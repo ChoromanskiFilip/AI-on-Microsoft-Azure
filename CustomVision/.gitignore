@@ -1,0 +1,8 @@
+env
+images
+annotations
+lfw-deepfunneled
+.venv
+__pycache__
+test_pics
+.vscode

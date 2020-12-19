@@ -11,3 +11,4 @@
 ## Sprawozdania:
 
 - [Bot dla sklepu internetowego](Store-Bot\Sprawozdanie_Bot.md)
+- [Mask Detector](CustomVision\Sprawozdanie_CustomVision.md)
